@@ -1,0 +1,15 @@
+{
+  "workspace": [
+    "./packages/client/node",
+    "./packages/client/batcher",
+    "./packages/client/database",
+    "./packages/shared/data-types",
+    "./packages/shared/simulation"
+  ],
+  "tasks": {
+    "dev": "deno task --filter @werewolf/node dev",
+    "testnet": "deno task --filter @werewolf/node testnet",
+    "frontend:dev": "cd packages/frontend && npm run dev",
+    "frontend:build": "cd packages/frontend && npm run build"
+  }
+}

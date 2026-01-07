@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Werewolf Game - Paima Engine</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <header>
+        <h1>Werewolf Game</h1>
+        <div id="wallet-info"></div>
+      </header>
+
+      <main>
+        <canvas id="game-canvas"></canvas>
+
+        <div id="game-ui">
+          <div id="loading-screen" class="screen active">
+            <h2>Loading...</h2>
+            <p>Initializing Werewolf Game</p>
+          </div>
+
+          <div id="main-menu" class="screen">
+            <h2>Main Menu</h2>
+            <button id="start-game-btn" class="btn-primary">Start Game</button>
+            <button id="connect-wallet-btn" class="btn-secondary">Connect Wallet</button>
+          </div>
+
+          <div id="game-screen" class="screen">
+            <div id="game-info">
+              <p>Game content will appear here</p>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

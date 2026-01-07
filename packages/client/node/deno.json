@@ -1,0 +1,30 @@
+{
+  "name": "@werewolf/node",
+  "version": "0.1.0",
+  "exports": {
+    ".": "./src/main.ts"
+  },
+  "tasks": {
+    "dev": "deno run -A --unstable-detect-cjs src/main.dev.ts",
+    "testnet": "deno run -A --unstable-detect-cjs src/main.testnet.ts"
+  },
+  "imports": {
+    "@paimaexample/concise": "jsr:@paimaexample/concise@0.3.126",
+    "@paimaexample/config": "jsr:@paimaexample/config@0.3.126",
+    "@paimaexample/log": "jsr:@paimaexample/log@0.3.126",
+    "@paimaexample/orchestrator": "jsr:@paimaexample/orchestrator@0.3.126",
+    "@paimaexample/runtime": "jsr:@paimaexample/runtime@0.3.126",
+    "@paimaexample/tui": "jsr:@paimaexample/tui@0.3.126",
+    "@paimaexample/utils": "jsr:@paimaexample/utils@0.3.126",
+    "@paimaexample/sm": "jsr:@paimaexample/sm@0.3.126",
+    "@paimaexample/coroutine": "jsr:@paimaexample/coroutine@0.3.126",
+    "@paimaexample/db": "jsr:@paimaexample/db@0.3.126",
+    "fastify": "npm:fastify@^5.4.0",
+    "pg": "npm:pg@^8.14.0",
+    "@sinclair/typebox": "npm:@sinclair/typebox@^0.34.30",
+    "effection": "npm:effection@^3.5.0",
+    "@werewolf/data-types": "../../../packages/shared/data-types/src/mod.ts",
+    "@werewolf/database": "../../../packages/client/database/src/mod.ts",
+    "@werewolf/simulation": "../../../packages/shared/simulation/src/mod.ts"
+  }
+}

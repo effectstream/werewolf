@@ -1,0 +1,8 @@
+{
+  "name": "@werewolf/simulation",
+  "version": "0.1.0",
+  "exports": "./src/mod.ts",
+  "imports": {
+    "@werewolf/data-types": "../../../packages/shared/data-types/src/mod.ts"
+  }
+}
