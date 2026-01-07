@@ -9,6 +9,7 @@
     "testnet": "deno run -A --unstable-detect-cjs src/main.testnet.ts"
   },
   "imports": {
+    // Paima packages
     "@paimaexample/concise": "jsr:@paimaexample/concise@0.3.126",
     "@paimaexample/config": "jsr:@paimaexample/config@0.3.126",
     "@paimaexample/log": "jsr:@paimaexample/log@0.3.126",
@@ -23,6 +24,9 @@
     "pg": "npm:pg@^8.14.0",
     "@sinclair/typebox": "npm:@sinclair/typebox@^0.34.30",
     "effection": "npm:effection@^3.5.0",
+    "@paimaexample/explorer": "npm:@paimaexample/explorer@0.3.126",
+    "@midnight-ntwrk/onchain-runtime": "npm:@midnight-ntwrk/onchain-runtime@^0.3.0",
+    // Local packages
     "@werewolf/data-types": "../../../packages/shared/data-types/src/mod.ts",
     "@werewolf/database": "../../../packages/client/database/src/mod.ts",
     "@werewolf/simulation": "../../../packages/shared/simulation/src/mod.ts"

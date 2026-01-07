@@ -1,15 +1,28 @@
 {
   "workspace": [
-    "./packages/client/node",
-    "./packages/client/batcher",
-    "./packages/client/database",
-    "./packages/shared/data-types",
-    "./packages/shared/simulation"
+    "./packages/**/*"
   ],
+  "nodeModulesDir": "auto",
   "tasks": {
     "dev": "deno task --filter @werewolf/node dev",
     "testnet": "deno task --filter @werewolf/node testnet",
     "frontend:dev": "cd packages/frontend && npm run dev",
     "frontend:build": "cd packages/frontend && npm run build"
+  },
+  "imports": {
+    // Workaround for missing Midnight dependencies
+    "@paimaexample/midnight-contracts": "jsr:@paimaexample/midnight-contracts@0.3.126"
+  },
+  "lint": {
+    "rules": {
+      "exclude": [
+        "no-this-alias",
+        "require-yield",
+        "no-explicit-any",
+        "ban-types",
+        "no-unused-vars",
+        "no-slow-types"
+      ]
+    }
   }
 }
