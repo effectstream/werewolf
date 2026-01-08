@@ -16,14 +16,6 @@ deno install --allow-scripts
 deno task dev
 ```
 
-This launches:
-- ✅ **Frontend**: http://localhost:3000 (HTML5 Canvas UI)
-- ✅ **Batcher**: http://localhost:3334 (Transaction batching with OpenAPI docs)
-- ✅ **Explorer**: http://localhost:10590 (Paima block explorer)
-- ✅ **Database**: PostgreSQL (pglite) on port 5432
-
-**Note**: The Paima node (effectstream-sync) currently fails to start due to a dependency issue in Paima v0.3.126. See [PAIMA_NOTES.md](PAIMA_NOTES.md) for details. All other services are fully functional for frontend and game logic development.
-
 ### Frontend Only
 
 For quick frontend-only development:
