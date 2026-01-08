@@ -1,8 +1,18 @@
 # Paima Engine Setup Notes
 
-## Current Status
+## Current Status ✅
 
-The werewolf project has been successfully set up with the correct Paima Engine structure based on block-kart-legends. However, there's a known dependency issue with the Paima Engine packages.
+The werewolf project is **successfully running** with the orchestrator-based approach!
+
+### What's Working:
+- ✅ **Frontend** (http://localhost:3000) - HTML5 Canvas with animations
+- ✅ **Batcher** (http://localhost:3334) - Transaction batching fully functional with OpenAPI docs at /documentation
+- ✅ **Explorer** (http://localhost:10590) - Paima block explorer
+- ✅ **Database** (pglite on port 5432) - PostgreSQL for game state
+- ✅ **Orchestrator** - Managing all services with proper lifecycle
+
+### Known Issue:
+The Paima node (effectstream-sync) fails to start due to a Midnight dependency issue in the JSR packages.
 
 ## Issue: Midnight Blockchain Dependencies
 
@@ -23,10 +33,25 @@ Some Paima packages are pulling in `@midnight-ntwrk/midnight-js-indexer-public-d
 4. ✅ Added all Midnight dependencies explicitly (as done in paima-engine/templates/minimal)
 5. ❌ Cannot add `@midnight-ntwrk/ledger-v6` (doesn't exist in npm)
 
-### Working Solutions
+### Orchestrator Approach (CURRENT - MOSTLY WORKING)
 
-**Option 1: Frontend Only (WORKING)**
-The frontend runs perfectly without any backend dependencies:
+Using the orchestrator-based startup from block-kart-legends:
+```bash
+deno install --allow-scripts  # First time only
+deno task dev
+```
+
+This starts:
+- ✅ **Frontend** at http://localhost:3000
+- ✅ **Batcher** at http://localhost:3334 (fully functional with OpenAPI docs)
+- ✅ **Explorer** at http://localhost:10590
+- ✅ **Database** (pglite) on port 5432
+- ❌ **Paima node** fails due to JSR package pulling @midnight-ntwrk/midnight-js-indexer-public-data-provider@3.0.0-alpha.12
+
+**Impact**: The batcher, database, and frontend are all working. You can develop the game frontend, test transaction batching, and work with the database. Only the blockchain sync layer (Paima node) is non-functional.
+
+**Workaround: Frontend Only**
+The frontend runs perfectly standalone:
 ```bash
 cd packages/frontend
 npm run dev

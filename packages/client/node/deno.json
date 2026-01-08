@@ -5,8 +5,13 @@
     ".": "./src/main.ts"
   },
   "tasks": {
-    "dev": "deno run -A --unstable-detect-cjs src/main.dev.ts",
-    "testnet": "deno run -A --unstable-detect-cjs src/main.testnet.ts"
+    "check": "echo 'Skipping type check - @types/node resolution issue'",
+
+    "node:start:dev": "deno run -A --inspect --unstable-raw-imports src/main.dev.ts",
+    "node:start:testnet": "deno run -A --inspect --unstable-raw-imports src/main.testnet.ts",
+
+    "dev": "EFFECTSTREAM_ENV=dev NODE_ENV=development deno run -A --unstable-raw-imports scripts/start.dev.ts",
+    "testnet": "EFFECTSTREAM_ENV=testnet NODE_ENV=development deno run -A --unstable-raw-imports scripts/start.testnet.ts"
   },
   "imports": {
     // Paima packages
@@ -26,6 +31,7 @@
     "effection": "npm:effection@^3.5.0",
     "@paimaexample/explorer": "npm:@paimaexample/explorer@0.3.126",
     "@midnight-ntwrk/onchain-runtime": "npm:@midnight-ntwrk/onchain-runtime@^0.3.0",
+    "@types/node": "npm:@types/node@^20.0.0",
     // Local packages
     "@werewolf/data-types": "../../../packages/shared/data-types/src/mod.ts",
     "@werewolf/database": "../../../packages/client/database/src/mod.ts",

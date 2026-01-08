@@ -5,6 +5,7 @@
     ".": "./src/main.ts"
   },
   "tasks": {
+    "start": "deno run -A --unstable-detect-cjs src/main.ts",
     "dev": "deno run -A --unstable-detect-cjs src/main.ts"
   },
   "imports": {
@@ -16,6 +17,7 @@
     "effection": "npm:effection@^3.5.0",
     "@std/path": "jsr:@std/path@^1.1.3",
     "viem": "npm:viem@2.37.3",
+    "viem/chains": "npm:viem@2.37.3/chains",
     "@werewolf/data-types": "../../../packages/shared/data-types/src/mod.ts"
   }
 }

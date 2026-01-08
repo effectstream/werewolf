@@ -2,28 +2,49 @@
  * Transaction Batcher - Batches user transactions to reduce on-chain costs
  */
 
-import { initBatcher } from '@paimaexample/batcher';
-import config from '@werewolf/data-types/config.dev.ts';
+import { main, suspend } from "effection";
+import { createNewBatcher } from "@paimaexample/batcher";
+import { config, storage } from "./config.ts";
+import { effectstreaml2Adapter } from "./adapter-effectstreaml2.ts";
 
-const BATCHER_PORT = 3334;
+const batcher = createNewBatcher(config, storage);
+const batchIntervalMs = 100;
 
-async function main() {
-  console.log('Starting Transaction Batcher...');
-  console.log(`Batcher will run on port ${BATCHER_PORT}`);
+batcher
+  .addBlockchainAdapter("effectstreaml2", effectstreaml2Adapter, {
+    criteriaType: "time",
+    timeWindowMs: batchIntervalMs,
+  })
+  .setDefaultTarget("effectstreaml2");
 
+// Startup banner via state transition
+batcher
+  .addStateTransition("startup", ({ publicConfig }) => {
+    const banner =
+      `🎮 Werewolf Batcher startup - polling every ${publicConfig.pollingIntervalMs} ms\n` +
+      `      | 📍 Default Target: ${publicConfig.defaultTarget}\n` +
+      `      | ⛓️ Blockchain Adapter Targets: ${publicConfig.adapterTargets.join(", ")}\n` +
+      `      | 📋 Press Ctrl+C to stop gracefully`;
+    console.log(banner);
+  })
+  .addStateTransition("http:start", ({ port }) => {
+    const publicConfig = batcher.getPublicConfig();
+    const httpInfo =
+      `🌐 HTTP Server started\n` +
+      `      | URL: http://localhost:${port}\n` +
+      `      | Confirmation: ${publicConfig.confirmationLevel}\n` +
+      `      | Events Enabled: ${publicConfig.enableEventSystem}\n` +
+      `      | Polling: ${publicConfig.pollingIntervalMs} ms`;
+    console.log(httpInfo);
+  });
+
+main(function* () {
+  console.log("🚀 Starting Werewolf Batcher...");
   try {
-    // Initialize the batcher service
-    await initBatcher({
-      config,
-      port: BATCHER_PORT,
-    });
-
-    console.log('✓ Batcher initialized successfully');
-    console.log(`✓ Batcher available at http://localhost:${BATCHER_PORT}`);
+    yield* batcher.runBatcher();
   } catch (error) {
-    console.error('Failed to initialize batcher:', error);
-    Deno.exit(1);
+    console.error("❌ Batcher error:", error);
+    yield* batcher.gracefulShutdownOp();
   }
-}
-
-main();
+  yield* suspend();
+});
