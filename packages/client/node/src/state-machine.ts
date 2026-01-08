@@ -69,6 +69,14 @@ stm.addStateTransition("nightAction", function* (data) {
 
 /**
  * Export state machine as game state transitions
+ * In v0.3.128+, we manually create the generator function instead of using toStartConfig()
  */
-export const gameStateTransitions: StartConfigGameStateTransitions =
-  stm.toStartConfig();
+export const gameStateTransitions: StartConfigGameStateTransitions = function* (
+  blockHeight,
+  input,
+) {
+  if (blockHeight >= 0) {
+    yield* stm.processInput(input);
+  }
+  return;
+};

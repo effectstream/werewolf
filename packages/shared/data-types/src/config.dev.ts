@@ -36,5 +36,5 @@ export const config = new ConfigBuilder()
         })
       )
   )
-  .setPrimitives((builder) => builder)
+  .buildPrimitives((builder) => builder)
   .build();

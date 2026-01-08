@@ -11,7 +11,7 @@
   },
   "imports": {
     // Workaround for missing Midnight dependencies
-    "@paimaexample/midnight-contracts": "jsr:@paimaexample/midnight-contracts@0.3.126"
+    "@paimaexample/midnight-contracts": "jsr:@paimaexample/midnight-contracts@0.3.128"
   },
   "lint": {
     "rules": {
